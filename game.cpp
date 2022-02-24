@@ -272,7 +272,7 @@ void Game::checkMouse(){
     button_reset.checkHighlight();
     button_quit.checkHighlight();
 }
-#include <iostream>
+
 void Game::reset(){
     guess = 0;
     letter = 0;
@@ -285,7 +285,6 @@ void Game::reset(){
     }
 
     answer = words[randomInteger(0, words.size()-1)];
-    std::cout << answer << '\n';
 
     playing = true;
     valid = true;
@@ -303,15 +302,11 @@ void Game::readText(sf::Event& event){
     //BACKSPACE = 8
     //CTRL BACKSPACE = 127;
 
-    std::cout << "\n\nbreakpoint 1";
 
     if(letter < 5 && ((event.text.unicode >= UNICODE_A && event.text.unicode <= UNICODE_Z) || (event.text.unicode >= UNICODE_a && event.text.unicode <= UNICODE_z))){
         char c = toupper(static_cast<char>(event.text.unicode));
-    std::cout << "\nbreakpoint 2";
         entered.push_back(c);
-    std::cout << "\nbreakpoint 3";
         boxes[guess][letter].setCharacter(c);
-    std::cout << "\nbreakpoint 4";
         letter++;
         if(letter == 5) checkValid();
     }
@@ -330,7 +325,6 @@ void Game::readText(sf::Event& event){
     }
     else if(event.text.unicode == UNICODE_RETURN && letter == 5) enter();
     else if(event.text.unicode == 96) reset();
-    std::cout << "\nbreakpoint end";
 }
 
 void Game::checkValid(){
