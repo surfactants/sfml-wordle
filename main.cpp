@@ -3,7 +3,7 @@
 int main(){
     randomSeed();
 
-    sf::RenderWindow window(sf::VideoMode(), "name", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(), "wordle", sf::Style::Fullscreen);
 
     Game mainGame(window);
 
