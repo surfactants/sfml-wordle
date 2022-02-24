@@ -272,6 +272,7 @@ void Game::checkMouse(){
     button_reset.checkHighlight();
     button_quit.checkHighlight();
 }
+#include <iostream>
 
 void Game::reset(){
     guess = 0;
@@ -285,6 +286,8 @@ void Game::reset(){
     }
 
     answer = words[randomInteger(0, words.size()-1)];
+    answer = "POLLY";
+    std::cout << answer << '\n';
 
     playing = true;
     valid = true;
@@ -294,7 +297,6 @@ void Game::reset(){
         keys[i].reset();
         keys[i].setCharacter(c);
     }
-
 }
 
 void Game::readText(sf::Event& event){
@@ -347,8 +349,17 @@ void Game::setValid(bool state){
 
 void Game::enter(){
     if(valid){
+        std::map<char, int> count;
+        std::map<char, int> correct;
+        std::cout << "\nparsing entered: " << entered;
         for(unsigned int i=0; i<entered.length(); i++){
             char ec = entered.at(i);
+            correct[ec] += 0;
+            count[ec] = std::count(entered.begin(), entered.end(), ec);
+            for(unsigned int j=0; j<answer.length(); j++){
+                if(ec == answer.at(i)) correct[ec]++;
+            }
+            std::cout << "\nec " << ec << ", count " << count[ec];
             if(answer.find(ec) == std::string::npos){
                 boxes[guess][i].markWrong();
                 keymap[ec]->markWrong();
@@ -359,8 +370,11 @@ void Game::enter(){
                     keymap[ec]->markRight();
                 }
                 else{
-                    boxes[guess][i].markMaybe();
-                    keymap[ec]->markMaybe();
+                    int acount = std::count(answer.begin(), answer.end(), ec);
+                    if(count[ec] <= acount){
+                        boxes[guess][i].markMaybe();
+                        keymap[ec]->markMaybe();
+                    }
                 }
             }
         }
