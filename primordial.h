@@ -10,9 +10,8 @@
     /// \brief Seeds the random number generator.
     /// To be run once, at the beginning of int main()
     ///
-    /// \see randomInteger(), randomFloat(), randomBool(), weightedBool()
+    /// \see randomInteger()
     ///
-    ////////////////////////////////////////////////////////////
     void randomSeed();
 
     ////////////////////////////////////////////////////////////
@@ -23,20 +22,16 @@
     ///
     /// \return random
     ///
-    /// \see randomFloat(), randomBool(), weightedBool()
+    /// \see randomSeed()
     ///
-    ////////////////////////////////////////////////////////////
     int randomInteger(int floor, int ceil);
 
     ////////////////////////////////////////////////////////////
     /// \brief Converts a string to all-uppercase.
     ///
-    /// \param \b str
+    /// \param \b str ->std::transform
     ///
     /// \return \b str
     ///
-    /// \see capitalize()
-    ///
-    ////////////////////////////////////////////////////////////
     std::string makeUppercase(std::string str);
 #endif
