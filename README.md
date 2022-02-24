@@ -9,3 +9,6 @@ wordle clone, written in SFML 2.5.1 using GCC 5.1.0
 
 RoundedRectangleShape class was written by Rémi Bèges, from the SFML wiki:  
 https://github.com/SFML/SFML/wiki/Source:-Draw-Rounded-Rectangle
+
+font is Iosevka:  
+https://github.com/be5invis/iosevka
