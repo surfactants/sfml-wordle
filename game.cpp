@@ -272,7 +272,6 @@ void Game::checkMouse(){
     button_reset.checkHighlight();
     button_quit.checkHighlight();
 }
-
 void Game::reset(){
     guess = 0;
     letter = 0;
@@ -318,8 +317,10 @@ void Game::readText(sf::Event& event){
     }
     else if(event.text.unicode == UNICODE_CTRL_BACKSPACE && letter > 0){
         for(unsigned int i=0; i<5; i++){
+            if(!valid) boxes[guess][i].setValid(true);
             boxes[guess][i].reset();
         }
+        valid = true;
         entered = "";
         letter = 0;
     }
@@ -353,7 +354,7 @@ void Game::enter(){
             correct[ec] += 0;
             if(correct[ec] == 0){
                 for(unsigned int j=0; j<answer.length(); j++){
-                    if(answer.at(j) == entered.at(j)) correct[ec]++;
+                    if(answer.at(j) == entered.at(j) && answer.at(j) == ec) correct[ec]++;
                 }
             }
 
