@@ -14,7 +14,6 @@ float Box::radius_box = 3;
 
 Box::Box(){
     character.setFillColor(color_text);
-    character.setCharacterSize(64);
 
     box.setCornerPointCount(points_box);
     box.setCornersRadius(radius_box);
@@ -22,7 +21,6 @@ Box::Box(){
 
 Box::Box(char c){
     character.setFillColor(color_text);
-    character.setCharacterSize(64);
 
     box.setCornerPointCount(points_box);
     box.setCornersRadius(radius_box);
@@ -92,12 +90,14 @@ char Box::getChar(){
 sf::Color Button::color_fill = sf::Color(125,125,125);
 sf::Color Button::color_highlight = sf::Color(225,225,225);
 
+float Button::radius_box = 3;
+
 Button::Button(sf::Font& font, std::string title){
     text.setFont(font);
     text.setString(title);
-    text.setCharacterSize(48);
-    box.setCornerPointCount(5);
-    box.setCornersRadius(5);
+    text.setCharacterSize(size_char);
+    box.setCornerPointCount(points_box);
+    box.setCornersRadius(radius_box);
 
     unhighlight();
 
@@ -159,7 +159,7 @@ Game::Game(sf::RenderWindow& newWindow) : window{ newWindow }{
     }
     wlist.close();
 
-    color_text = sf::Color(150,150,150);
+    color_text = sf::Color(200,200,200);
 
     boxes.resize(6);
 
@@ -272,6 +272,7 @@ void Game::checkMouse(){
     button_reset.checkHighlight();
     button_quit.checkHighlight();
 }
+
 void Game::reset(){
     guess = 0;
     letter = 0;
