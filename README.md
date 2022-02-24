@@ -7,6 +7,5 @@ wordle clone, written in SFML 2.5.1 using GCC 5.1.0
 
 `escape` exits the game
 
-RoundedRectangleShape class was written by Rémi Bèges, from the SFML wiki:
-
+RoundedRectangleShape class was written by Rémi Bèges, from the SFML wiki:  
 https://github.com/SFML/SFML/wiki/Source:-Draw-Rounded-Rectangle
