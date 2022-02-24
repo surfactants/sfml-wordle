@@ -272,7 +272,6 @@ void Game::checkMouse(){
     button_reset.checkHighlight();
     button_quit.checkHighlight();
 }
-#include <iostream>
 void Game::reset(){
     guess = 0;
     letter = 0;
@@ -285,7 +284,6 @@ void Game::reset(){
     }
 
     answer = words[randomInteger(0, words.size()-1)];
-    std::cout << '\n' << answer;
 
     playing = true;
     valid = true;
