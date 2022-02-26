@@ -7,7 +7,7 @@ wordle clone, written in SFML 2.5.1 using GCC 5.1.0
 
 `escape` exits the game
 
-Word list is a lightly edited version of Alan Beale's 12Dicts American 2of12inf list, version 6.0.2:
+Word list is a lightly edited version of Alan Beale's 12Dicts American 2of12inf list, version 6.0.2: 
 http://wordlist.aspell.net/12dicts/
 
 RoundedRectangleShape class was written by Rémi Bèges, from the SFML wiki:  
