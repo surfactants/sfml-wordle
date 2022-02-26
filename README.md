@@ -3,7 +3,7 @@ wordle clone, written in SFML 2.5.1 using GCC 5.1.0
 
 `ctrl + backspace` deletes the whole entry
 
-`return` restarts the game
+`return` inputs a guess, or restarts the game if it has ended
 
 `escape` exits the game
 
