@@ -1,5 +1,5 @@
 # sfml-wordle
-Wordle clone, written in SFML 2.5.1 using GCC 5.1.0
+Wordle clone, compiled with GCC 5.1.0, using SFML 2.5.1
 
 `ctrl + backspace` deletes the whole entry.
 
