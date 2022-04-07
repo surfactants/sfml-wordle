@@ -181,39 +181,15 @@ Game::Game(sf::RenderWindow& newWindow) : window{ newWindow }{
         pos.y += offset.y;
     }
 
-    keys.push_back(Box('Q'));
-    keys.push_back(Box('W'));
-    keys.push_back(Box('E'));
-    keys.push_back(Box('R'));
-    keys.push_back(Box('T'));
-    keys.push_back(Box('Y'));
-    keys.push_back(Box('U'));
-    keys.push_back(Box('I'));
-    keys.push_back(Box('O'));
-    keys.push_back(Box('P'));
-    keys.push_back(Box('A'));
-    keys.push_back(Box('S'));
-    keys.push_back(Box('D'));
-    keys.push_back(Box('F'));
-    keys.push_back(Box('G'));
-    keys.push_back(Box('H'));
-    keys.push_back(Box('J'));
-    keys.push_back(Box('K'));
-    keys.push_back(Box('L'));
-    keys.push_back(Box('Z'));
-    keys.push_back(Box('X'));
-    keys.push_back(Box('C'));
-    keys.push_back(Box('V'));
-    keys.push_back(Box('B'));
-    keys.push_back(Box('N'));
-    keys.push_back(Box('M'));
+    std::string keyString = "QWERTYUIOPASDFGHJKLZXCVBNM";
 
     sf::Vector2f size_key(60, 60);
     offset = size_key + sf::Vector2f(4,4);
 
     pos.x = spos.x - offset.x * 1.5;
 
-    for(unsigned int i = 0; i < keys.size(); i++){
+    for(unsigned int i = 0; i < keyString.size(); i++){
+        keys.push_back(keyString[i]);
         keys[i].setFont(font);
         keys[i].setPosition(pos);
         keys[i].setSize(size_key);
@@ -272,6 +248,7 @@ void Game::checkMouse(){
     button_reset.checkHighlight();
     button_quit.checkHighlight();
 }
+
 void Game::reset(){
     guess = 0;
     letter = 0;
