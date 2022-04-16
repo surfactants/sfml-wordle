@@ -1,6 +1,6 @@
-# sfml-wordle
+# SFML Wordle Clone
 
-Wordle clone, compiled with GCC 5.1.0, using SFML 2.5.1
+Compiled with GCC 5.1.0, using SFML 2.5.1
 
 Only optimized for 1080p Windows systems.
 
