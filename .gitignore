@@ -39,6 +39,8 @@
 *.depend
 *.layout
 
+*.ttf
+
 # git cruft
 .gitattributes
 _resources
