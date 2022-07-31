@@ -1,0 +1,2 @@
+# sfml-wordle
+ wordle clone
