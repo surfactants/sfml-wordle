@@ -19,6 +19,11 @@ Only natively released for Windows.
 
 The keyboard isn't clickable: it's just there to track letters.
 
+## config.txt
+The config file, stored in the main directory, contains two values:
+- COLORBLIND is a boolean flag for choosing a more colorblind-friendly palette
+- FONT is the name of the font file located in *data/*
+
 ## Notes
 Word list is a lightly edited version of Alan Beale's 12Dicts American 2of12inf list, version 6.0.2:  
 http://wordlist.aspell.net/12dicts/  

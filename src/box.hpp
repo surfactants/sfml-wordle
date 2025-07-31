@@ -37,21 +37,13 @@ void centerText(sf::Text& text);
 /// Box ///
 /// \brief For holding guesses, and the on-screen keyboard.
 ///
-class Box : public sf::Drawable{
-private:
-    static sf::Color color_empty;
+class Box : public sf::Drawable {
+public:
     static sf::Color color_wrong;
+    static sf::Color color_invalid;
     static sf::Color color_maybe;
     static sf::Color color_right;
-    static sf::Color color_text;
-    static sf::Color color_invalid;
 
-    const static int points_box = 5;
-    static float radius_box;
-
-    sf::RoundedRectangleShape box;
-    sf::Text character;
-public:
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor.
     ///
@@ -63,11 +55,6 @@ public:
     /// \param c -> setCharacter()
     ///
     Box(char c);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Draws the box and text to the render target.
-    ///
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Sets the character font
@@ -130,5 +117,22 @@ public:
     /// \return character.getString()
     ///
     char getChar();
+
+private:
+    static const sf::Color color_text;
+    static const sf::Color color_outline;
+    static const sf::Color color_empty;
+
+    static const float outline_thickness;
+    static const int points_box { 5 };
+    static const float radius_box;
+
+    sf::RoundedRectangleShape box;
+    sf::Text character;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draws the box and text to the render target.
+    ///
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

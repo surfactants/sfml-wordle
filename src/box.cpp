@@ -32,26 +32,42 @@ void centerText(sf::Text& text)
     text.setOrigin(trect.left + trect.width / 2.f, trect.top + trect.height / 2.f);
 }
 
-sf::Color Box::color_empty = sf::Color(180,180,180);
-sf::Color Box::color_wrong = sf::Color(255,150,150);
-sf::Color Box::color_maybe = sf::Color(255,255,180);
-sf::Color Box::color_right = sf::Color(150,255,150);
-sf::Color Box::color_text = sf::Color(50,50,50);
-sf::Color Box::color_invalid = sf::Color(255,100,100);
+const sf::Color Box::color_text = sf::Color(244, 244, 244);
+const sf::Color Box::color_outline = Box::color_text;
+const sf::Color Box::color_empty = sf::Color(11, 11, 11);
 
-float Box::radius_box = 3;
+sf::Color Box::color_wrong = sf::Color(199, 55, 55);
+sf::Color Box::color_invalid = Box::color_wrong;
+sf::Color Box::color_maybe = sf::Color(211, 211, 22);
+sf::Color Box::color_right = sf::Color(55, 211, 55);
+
+
+const float Box::outline_thickness { 2.f };
+
+const float Box::radius_box { 2.f };
 
 Box::Box()
 {
     character.setFillColor(color_text);
+    character.setOutlineColor(color_empty);
+    character.setOutlineThickness(outline_thickness);
+
+    box.setOutlineColor(color_outline);
+    box.setOutlineThickness(outline_thickness);
 
     box.setCornerPointCount(points_box);
     box.setCornersRadius(radius_box);
+
 }
 
 Box::Box(char c)
 {
     character.setFillColor(color_text);
+    character.setOutlineColor(color_empty);
+    character.setOutlineThickness(outline_thickness);
+
+    box.setOutlineColor(color_outline);
+    box.setOutlineThickness(outline_thickness);
 
     box.setCornerPointCount(points_box);
     box.setCornersRadius(radius_box);

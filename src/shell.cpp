@@ -26,11 +26,15 @@
 
 #include <shell.hpp>
 
+#include <fstream>
+
 Shell::Shell()
     : window { sf::VideoMode(), "treeviz", sf::Style::Fullscreen, sf::ContextSettings(0, 0, 4) }
 {
     view.setSize(sf::Vector2f(window.getSize()));
     view.setCenter(sf::Vector2f(window.getSize()) / 2.f);
+
+    readConfig();
 
     game = std::make_unique<Game>(window);
 }
@@ -63,6 +67,33 @@ void Shell::input()
             window.close();
         }
     }
+}
+
+void Shell::readConfig()
+{
+    const std::string config_file = "config.txt";
+    std::ifstream config_in(config_file, std::ios::in);
+    std::string line;
+    while (std::getline(config_in, line)) {
+        if (line.find("COLORBLIND") != std::string::npos) {
+            if (line.find('1') != std::string::npos) {
+                loadColorblindPalette();
+            }
+        }
+        else if (line.find("FONT") != std::string::npos) {
+            Game::font_file = line.substr(line.find('=') + 1);
+        }
+    }
+}
+
+void Shell::loadColorblindPalette()
+{
+    // the colorblind palette, as found here: https://davidmathlogic.com/colorblind/
+    // (the page on ibm's website to which that page links is no longer there)
+    Box::color_wrong = sf::Color(220, 38, 127); // ibm pink
+    Box::color_invalid = Box::color_wrong;
+    Box::color_maybe = sf::Color(255, 176, 0); // ibm yellow
+    Box::color_right = sf::Color(100, 143, 255); // ibm blue
 }
 
 void Shell::draw()

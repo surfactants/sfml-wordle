@@ -1,0 +1,2 @@
+COLORBLIND=0
+FONT=iosevka-fixed-bold.ttf

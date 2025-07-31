@@ -30,11 +30,12 @@
 
 #include <fstream>
 
-#include <iostream>
+std::string Game::font_file;
 
 Game::Game(sf::RenderWindow& window)
 {
-    font.loadFromFile("data/iosevka-fixed-bold.ttf");
+    std::string font_loc = "data/" + font_file;
+    font.loadFromFile(font_loc);
     closeWindow = std::bind(sf::RenderWindow::close, &window);
 
     std::ifstream wlist("data/words.txt", std::ios::in);
@@ -49,11 +50,11 @@ Game::Game(sf::RenderWindow& window)
     sf::Vector2f center(window.getSize());
     center /= 2.f;
 
-    const sf::Vector2f box_size(84.f, 84.f);
-    const sf::Vector2f box_padding(6.f, 6.f);
+    const sf::Vector2f box_size(101.f, 101.f);
+    const sf::Vector2f box_padding(11.f, 11.f);
     const sf::Vector2f box_offset(box_size + box_padding);
 
-    sf::Vector2f base_guess_pos(center.x, box_size.y - box_padding.y);
+    sf::Vector2f base_guess_pos(center.x, box_padding.y);
     base_guess_pos.x -= box_size.x / 2.f;
     base_guess_pos.x -= box_offset.x * 2.f;
     sf::Vector2f guess_pos(base_guess_pos);
@@ -77,11 +78,11 @@ Game::Game(sf::RenderWindow& window)
         "ZXCVBNM"
     };
 
-    const sf::Vector2f key_size(64.f, 64.f);
-    const sf::Vector2f key_padding(2.f, 2.f);
+    const sf::Vector2f key_size(72.f, 72.f);
+    const sf::Vector2f key_padding(8.f, 8.f);
     const sf::Vector2f key_offset(key_size + key_padding);
 
-    sf::Vector2f key_pos(center.x, guess_pos.y);
+    sf::Vector2f key_pos(center.x, guess_pos.y + key_padding.y);
 
     for (const auto& key_row : key_strings) {
         key_pos.x = center.x;
@@ -278,7 +279,3 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
         target.draw(k.second, states);
     }
 }
-
-///////////////////////////////////
-//END GAME IMPLEMENTATION
-///////////////////////////////////

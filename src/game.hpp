@@ -45,7 +45,7 @@
 ////////////////////////////////////////////////////////////
 /// \brief Main game container class, for handling the game itself.
 ///
-class Game : public sf::Drawable{
+class Game : public sf::Drawable {
 public:
     Game() = delete;
 
@@ -92,6 +92,8 @@ public:
     /// \brief Converts a string to all-uppercase.
     ///
     std::string makeUppercase(std::string str);
+
+    static std::string font_file;
 
 private:
     sf::Font font; /**<Main font for UI, same as menu class*/

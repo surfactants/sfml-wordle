@@ -41,6 +41,9 @@ private:
     void input();
     void draw();
 
+    void readConfig();
+    void loadColorblindPalette();
+
     sf::RenderWindow window;
     sf::View view;
     sf::Event event;
