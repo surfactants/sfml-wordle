@@ -15,6 +15,8 @@ Only natively released for Windows.
 
 `escape` exits the game.
 
+`\`\/~` starts a new game.
+
 The keyboard isn't clickable: it's just there to track letters.
 
 ## Notes
