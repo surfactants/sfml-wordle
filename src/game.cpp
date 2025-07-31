@@ -50,8 +50,12 @@ Game::Game(sf::RenderWindow& window)
     sf::Vector2f center(window.getSize());
     center /= 2.f;
 
-    const sf::Vector2f box_size(101.f, 101.f);
-    const sf::Vector2f box_padding(11.f, 11.f);
+    const float box_factor = 10.f;
+    const float dimension_box = window.getSize().y / box_factor;
+    const float dimension_bpad = dimension_box / box_factor;
+
+    const sf::Vector2f box_size(dimension_box, dimension_box);
+    const sf::Vector2f box_padding(dimension_bpad, dimension_bpad);
     const sf::Vector2f box_offset(box_size + box_padding);
 
     sf::Vector2f base_guess_pos(center.x, box_padding.y);
@@ -78,8 +82,12 @@ Game::Game(sf::RenderWindow& window)
         "ZXCVBNM"
     };
 
-    const sf::Vector2f key_size(72.f, 72.f);
-    const sf::Vector2f key_padding(8.f, 8.f);
+    const float key_factor = 15.f;
+    const float dimension_key = window.getSize().y / key_factor;
+    const float dimension_kpad = dimension_key / (key_factor * .5f);
+
+    const sf::Vector2f key_size(dimension_key, dimension_key);
+    const sf::Vector2f key_padding(dimension_kpad, dimension_kpad);
     const sf::Vector2f key_offset(key_size + key_padding);
 
     sf::Vector2f key_pos(center.x, guess_pos.y + key_padding.y);
@@ -112,10 +120,12 @@ Game::Game(sf::RenderWindow& window)
     }
 
     sf::Vector2f text_pos(center.x, key_pos.y);
-    text_pos.y += 64.f;
+    text_pos.y += key_padding.y * 3.f;
 
+    const float font_factor = 20.f;
+    unsigned int character_size = window.getSize().y / font_factor;
     text_over.setFont(font);
-    text_over.setCharacterSize(48);
+    text_over.setCharacterSize(character_size);
     text_over.setPosition(text_pos);
     text_over.setFillColor(color_text);
 
