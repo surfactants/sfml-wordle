@@ -4,7 +4,7 @@ Written by [surfactants](github.com/surfactants)
 
 Compiled with GCC 11.2.0, using SFML 2.5.1
 
-Optimized for 1080p.
+Optimized for >= 1080p.
 
 Only natively released for Windows.
 
