@@ -1,6 +1,6 @@
-# SFML Wordle Clone
+# sfml-wordle
 ## About
-Written by [surfactants](github.com/surfactants)
+A Wordle clone, written by [surfactants](github.com/surfactants)
 
 Compiled with GCC 11.2.0, using SFML 2.5.1
 
