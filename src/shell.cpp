@@ -28,8 +28,16 @@
 
 #include <fstream>
 
+#include <iostream>
+
+const std::string Config::COLORBLIND = "COLORBLIND";
+const std::string Config::FONT = "FONT";
+const std::string Config::FULLSCREEN = "FULLSCREEN";
+
+const std::string Shell::window_name = "NOT-wordle";
+
 Shell::Shell()
-    : window { sf::VideoMode(), "treeviz", sf::Style::Fullscreen, sf::ContextSettings(0, 0, 4) }
+    : window { sf::VideoMode(), window_name, sf::Style::Fullscreen, sf::ContextSettings(0, 0, 4) }
 {
     view.setSize(sf::Vector2f(window.getSize()));
     view.setCenter(sf::Vector2f(window.getSize()) / 2.f);
@@ -74,14 +82,25 @@ void Shell::readConfig()
     const std::string config_file = "config.txt";
     std::ifstream config_in(config_file, std::ios::in);
     std::string line;
+    auto read = [](const std::string& line) {
+        return line.substr(0, line.find('='));
+    };
     while (std::getline(config_in, line)) {
-        if (line.find("COLORBLIND") != std::string::npos) {
+        std::string key = read(line);
+        if (key == Config::COLORBLIND) {
             if (line.find('1') != std::string::npos) {
                 loadColorblindPalette();
             }
         }
-        else if (line.find("FONT") != std::string::npos) {
+        else if (key == Config::FONT) {
             Game::font_file = line.substr(line.find('=') + 1);
+        }
+        else if (key == Config::FULLSCREEN) {
+            std::cout << "found fullscreen line\n";
+            if (line.find('0') != std::string::npos) {
+                std::cout << "switching to not-fullscreen\n";
+                window.create(sf::VideoMode(800, 600), window_name, sf::Style::Resize, sf::ContextSettings(0, 0, 4));
+            }
         }
     }
 }

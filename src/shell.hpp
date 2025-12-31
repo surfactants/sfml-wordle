@@ -32,6 +32,12 @@
 
 #include <memory>
 
+struct Config {
+    static const std::string COLORBLIND;
+    static const std::string FONT;
+    static const std::string FULLSCREEN;
+};
+
 class Shell {
 public:
     Shell();
@@ -49,5 +55,7 @@ private:
     sf::Event event;
 
     std::unique_ptr<Game> game;
+
+    static const std::string window_name;
 };
 
