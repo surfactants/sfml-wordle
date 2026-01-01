@@ -28,6 +28,8 @@
 
 #include <fstream>
 
+#include <iostream>
+
 const std::string Config::COLORBLIND = "COLORBLIND";
 const std::string Config::FONT = "FONT";
 const std::string Config::FULLSCREEN = "FULLSCREEN";
@@ -35,8 +37,12 @@ const std::string Config::FULLSCREEN = "FULLSCREEN";
 const std::string Shell::window_name = "NOT-wordle";
 
 Shell::Shell()
-    : window { sf::VideoMode(), window_name, sf::Style::Fullscreen, sf::ContextSettings(0, 0, 4) }
+    : window { sf::VideoMode(800, 600), window_name, sf::Style::Default, sf::ContextSettings(0, 0, 4) }
 {
+    sf::Image window_icon;
+    window_icon.loadFromFile("data/icon.png");
+    const sf::Vector2u icon_size = window_icon.getSize();
+    window.setIcon(icon_size.x, icon_size.y, window_icon.getPixelsPtr());
     readConfig();
     game = std::make_unique<Game>(window);
     resizeWindow();
@@ -103,7 +109,7 @@ void Shell::readConfig()
         }
         else if (key == Config::FULLSCREEN) {
             if (line.find('0') != std::string::npos) {
-                window.create(sf::VideoMode(800, 600), window_name, sf::Style::Default, sf::ContextSettings(0, 0, 4));
+                //window.create(sf::VideoMode(800, 600), window_name, sf::Style::Default, sf::ContextSettings(0, 0, 4));
             }
         }
     }

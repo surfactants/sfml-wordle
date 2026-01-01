@@ -45,6 +45,12 @@
 .gitattributes
 _resources
 
+# icon
+*.aseprite
+
+# builds
+bin/*
+
 # releases
 /release/
 release.zip

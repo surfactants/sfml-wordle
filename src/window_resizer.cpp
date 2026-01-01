@@ -65,7 +65,7 @@ void Window_Resizer::operator() (const sf::Vector2u& wsize)
     // KEYS
     const float key_factor = 15.f;
     const float dimension_key = wsize.y / key_factor;
-    const float dimension_kpad = dimension_key / (key_factor * .5f);
+    const float dimension_kpad = dimension_key / (key_factor * .2f);
 
     const sf::Vector2f key_size(dimension_key, dimension_key);
     const sf::Vector2f key_padding(dimension_kpad, dimension_kpad);
