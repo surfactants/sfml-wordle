@@ -39,7 +39,7 @@ const sf::Color Box::color_empty = sf::Color(11, 11, 11);
 sf::Color Box::color_wrong = sf::Color(199, 55, 55);
 sf::Color Box::color_invalid = Box::color_wrong;
 sf::Color Box::color_maybe = sf::Color(211, 211, 22);
-sf::Color Box::color_right = sf::Color(55, 211, 55);
+sf::Color Box::color_right = sf::Color(66, 202, 66);
 
 
 const float Box::outline_thickness { 2.f };
@@ -57,7 +57,6 @@ Box::Box()
 
     box.setCornerPointCount(points_box);
     box.setCornersRadius(radius_box);
-
 }
 
 Box::Box(char c)
@@ -82,16 +81,14 @@ void Box::setFont(sf::Font& font)
 void Box::setSize(sf::Vector2f size)
 {
     box.setSize(size);
-    box.setOrigin(sf::Vector2f(size.x/2, 0));
-    character.setCharacterSize(size.x * 0.7);
-    character.setPosition(box.getPosition());
+    box.setOrigin(size * 0.5f);
+    character.setCharacterSize(size.x * 0.5);
     centerText(character);
 }
 
 void Box::setPosition(sf::Vector2f pos)
 {
     box.setPosition(pos);
-    pos.x += box.getSize().x/4;
     character.setPosition(pos);
 }
 
@@ -104,8 +101,7 @@ void Box::reset()
 void Box::setCharacter(char c)
 {
     character.setString(c);
-    character.setOrigin(sf::Vector2f(character.getLocalBounds().width/2, 0));
-    character.setPosition(box.getPosition());
+    centerText(character);
 }
 
 void Box::markWrong()

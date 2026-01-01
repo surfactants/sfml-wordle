@@ -27,9 +27,13 @@
 #pragma once
 
 #include <box.hpp>
+#include <window_resizer.hpp>
 
 #include <functional>
 #include <string>
+
+#include <map>
+#include <vector>
 
 #define UNICODE_a 97
 #define UNICODE_z 122
@@ -42,56 +46,38 @@
 
 #define UNICODE_BACKTICK 96
 
-////////////////////////////////////////////////////////////
-/// \brief Main game container class, for handling the game itself.
-///
+/// \brief Game logic and rendering.
 class Game : public sf::Drawable {
 public:
     Game() = delete;
 
-    ////////////////////////////////////////////////////////////
     /// \brief Full constructor.
-    ///
     Game(sf::RenderWindow& window);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Restarts the game.
-    ///
     void reset();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Reads keyboard input.
-    ///
     void readText(sf::Event& event);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Attempts to submit a guess.
-    ///
     void enter();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Checks if there is an active game.
-    ///
     /// \return playing (true if game is over)
-    ///
     bool isPlaying();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Matches entered guess against the word list.
-    ///
     void checkValid();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Used for resetting the game
-    ///
     /// \param state -> valid
-    ///
     void setValid(bool state);
 
-    /// makeUppercase ///
     /// \brief Converts a string to all-uppercase.
-    ///
     std::string makeUppercase(std::string str);
+
+    Window_Resizer resize;
 
     static std::string font_file;
 
@@ -115,6 +101,8 @@ private:
 
     std::vector<std::vector<Box>> boxes;
 
+    static std::vector<std::string> key_strings;
+
     bool valid;
 
     std::function<void()> closeWindow;
@@ -122,8 +110,6 @@ private:
     static const unsigned int guess_rows { 6 };
     static const unsigned int guess_columns { 5 };
 
-    ////////////////////////////////////////////////////////////
     /// \brief Draws the game to the render target.
-    ///
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

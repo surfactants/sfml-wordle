@@ -39,12 +39,9 @@ const std::string Shell::window_name = "NOT-wordle";
 Shell::Shell()
     : window { sf::VideoMode(), window_name, sf::Style::Fullscreen, sf::ContextSettings(0, 0, 4) }
 {
-    view.setSize(sf::Vector2f(window.getSize()));
-    view.setCenter(sf::Vector2f(window.getSize()) / 2.f);
-
     readConfig();
-
     game = std::make_unique<Game>(window);
+    resizeWindow();
 }
 
 void Shell::run()
@@ -71,10 +68,21 @@ void Shell::input()
                 game->reset();
             }
         }
+        else if (event.type == sf::Event::Resized) {
+            resizeWindow();
+        }
         else if (event.type == sf::Event::Closed) {
             window.close();
         }
     }
+}
+
+void Shell::draw()
+{
+    window.clear();
+        window.setView(view);
+        window.draw(*game);
+    window.display();
 }
 
 void Shell::readConfig()
@@ -99,7 +107,7 @@ void Shell::readConfig()
             std::cout << "found fullscreen line\n";
             if (line.find('0') != std::string::npos) {
                 std::cout << "switching to not-fullscreen\n";
-                window.create(sf::VideoMode(800, 600), window_name, sf::Style::Resize, sf::ContextSettings(0, 0, 4));
+                window.create(sf::VideoMode(800, 600), window_name, sf::Style::Default, sf::ContextSettings(0, 0, 4));
             }
         }
     }
@@ -115,10 +123,10 @@ void Shell::loadColorblindPalette()
     Box::color_right = sf::Color(100, 143, 255); // ibm blue
 }
 
-void Shell::draw()
+void Shell::resizeWindow()
 {
-    window.clear();
-        window.setView(view);
-        window.draw(*game);
-    window.display();
+    const sf::Vector2u& wsize = window.getSize();
+    view.setSize(sf::Vector2f(wsize));
+    view.setCenter(sf::Vector2f(wsize) * 0.5f);
+    game->resize(wsize);
 }

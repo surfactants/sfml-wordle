@@ -30,13 +30,10 @@
 
 #include <roundedRectangle.hpp>
 
-/// centerText ///
-/// \brief ... sets a text object's origin to the center of its local frame bounds
+/// \brief sets a text object's origin to the center of its local frame bounds
 void centerText(sf::Text& text);
 
-/// Box ///
 /// \brief For holding guesses, and the on-screen keyboard.
-///
 class Box : public sf::Drawable {
 public:
     static sf::Color color_wrong;
@@ -44,81 +41,50 @@ public:
     static sf::Color color_maybe;
     static sf::Color color_right;
 
-    ////////////////////////////////////////////////////////////
     /// \brief Default constructor.
-    ///
     Box();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Secondary constructor for keys.
-    ///
     /// \param c -> setCharacter()
-    ///
     Box(char c);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Sets the character font
-    ///
     /// \param font -> character.setFont()
-    ///
     void setFont(sf::Font& font);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Sets the size of the box, and calculates text size.
-    ///
     /// \param siz -> box.setSize(), siz.x -> character.setCharacterSize()
-    ///
     void setSize(sf::Vector2f size);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Places the box and text.
-    ///
     /// \param pos -> box.setPosition() -> character.setPosition()
-    ///
     void setPosition(sf::Vector2f pos);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Clears entered character and resets the color.
-    ///
     void reset();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Sets the character text's string.
-    ///
     /// \param c -> character.setString()
-    ///
     void setCharacter(char c);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Sets color to indicate a letter is wrong.
-    ///
     void markWrong();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Sets color to indicate a letter is correct, but misplaced.
-    ///
     void markMaybe();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Sets color to indicate a letter is correct.
-    ///
     void markRight();
 
-    ////////////////////////////////////////////////////////////
     /// \brief Sets text color based on validity of entered word.
-    ///
     /// \param valid -> character.setFillColor()
-    ///
     void setValid(bool valid);
 
-    ////////////////////////////////////////////////////////////
     /// \brief Returns the text string's character
-    ///
     /// \return character.getString()
-    ///
     char getChar();
 
-private:
+//private:
     static const sf::Color color_text;
     static const sf::Color color_outline;
     static const sf::Color color_empty;
@@ -130,9 +96,7 @@ private:
     sf::RoundedRectangleShape box;
     sf::Text character;
 
-    ////////////////////////////////////////////////////////////
     /// \brief Draws the box and text to the render target.
-    ///
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

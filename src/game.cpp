@@ -30,10 +30,23 @@
 
 #include <fstream>
 
+#include <iostream>
+
 std::string Game::font_file;
 
+
+std::vector<std::string> Game::key_strings = {
+    "QWERTYUIOP",
+    "ASDFGHJKL",
+    "ZXCVBNM"
+};
+
 Game::Game(sf::RenderWindow& window)
+    : resize { keymap, boxes, key_strings, text_over }
 {
+    resize.guess_rows = guess_rows;
+    resize.guess_columns = guess_columns;
+
     std::string font_loc = "data/" + font_file;
     font.loadFromFile(font_loc);
     closeWindow = std::bind(sf::RenderWindow::close, &window);
@@ -47,87 +60,27 @@ Game::Game(sf::RenderWindow& window)
 
     color_text = sf::Color(200,200,200);
 
-    sf::Vector2f center(window.getSize());
-    center /= 2.f;
+    text_over.setFont(font);
+    text_over.setFillColor(color_text);
 
-    const float box_factor = 10.f;
-    const float dimension_box = window.getSize().y / box_factor;
-    const float dimension_bpad = dimension_box / box_factor;
-
-    const sf::Vector2f box_size(dimension_box, dimension_box);
-    const sf::Vector2f box_padding(dimension_bpad, dimension_bpad);
-    const sf::Vector2f box_offset(box_size + box_padding);
-
-    sf::Vector2f base_guess_pos(center.x, box_padding.y);
-    base_guess_pos.x -= box_size.x / 2.f;
-    base_guess_pos.x -= box_offset.x * 2.f;
-    sf::Vector2f guess_pos(base_guess_pos);
-
+    // make boxes
     boxes.resize(guess_rows);
     for (unsigned int i = 0; i < guess_rows; i++) {
         boxes[i].resize(guess_columns);
         for (unsigned int j = 0; j < guess_columns; j++) {
             boxes[i][j].setFont(font);
-            boxes[i][j].setSize(box_size);
-            boxes[i][j].setPosition(guess_pos);
-            guess_pos.x += box_offset.x;
         }
-        guess_pos.x = base_guess_pos.x;
-        guess_pos.y += box_offset.y;
     }
 
-    std::vector<std::string> key_strings = {
-        "QWERTYUIOP",
-        "ASDFGHJKL",
-        "ZXCVBNM"
-    };
-
-    const float key_factor = 15.f;
-    const float dimension_key = window.getSize().y / key_factor;
-    const float dimension_kpad = dimension_key / (key_factor * .5f);
-
-    const sf::Vector2f key_size(dimension_key, dimension_key);
-    const sf::Vector2f key_padding(dimension_kpad, dimension_kpad);
-    const sf::Vector2f key_offset(key_size + key_padding);
-
-    sf::Vector2f key_pos(center.x, guess_pos.y + key_padding.y);
-
+    // make keys
     for (const auto& key_row : key_strings) {
-        key_pos.x = center.x;
         const unsigned int key_count = key_row.size();
-        const unsigned int half_count = key_count / 2;
-        float x_offset;
-        if (key_count % 2 == 0) { // even
-            x_offset = half_count * key_size.x;
-            x_offset += (static_cast<float>(half_count) + .5f) * key_padding.x;
-        }
-        else { // odd
-            x_offset = (static_cast<float>(half_count) + .5f) * key_size.x;
-            x_offset += half_count * key_padding.x;
-        }
-
-        key_pos.x -= x_offset;
-
         for (unsigned int i = 0; i < key_count; i++) {
             char k = key_row[i];
             keymap[k] = Box(key_row[i]);
             keymap[k].setFont(font);
-            keymap[k].setSize(key_size);
-            keymap[k].setPosition(key_pos);
-            key_pos.x += key_offset.x;
         }
-        key_pos.y += key_offset.y;
     }
-
-    sf::Vector2f text_pos(center.x, key_pos.y);
-    text_pos.y += key_padding.y * 3.f;
-
-    const float font_factor = 20.f;
-    unsigned int character_size = window.getSize().y / font_factor;
-    text_over.setFont(font);
-    text_over.setCharacterSize(character_size);
-    text_over.setPosition(text_pos);
-    text_over.setFillColor(color_text);
 
     reset();
 }
@@ -229,7 +182,9 @@ void Game::enter()
             correct[ec] += 0;
             if (correct[ec] == 0) {
                 for (unsigned int j = 0; j < answer.length(); j++) {
-                    if (answer.at(j) == entered.at(j) && answer.at(j) == ec) correct[ec]++;
+                    if (answer.at(j) == entered.at(j) && answer.at(j) == ec) {
+                        correct[ec]++;
+                    }
                 }
             }
 

@@ -49,6 +49,7 @@ private:
 
     void readConfig();
     void loadColorblindPalette();
+    void resizeWindow();
 
     sf::RenderWindow window;
     sf::View view;

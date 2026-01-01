@@ -1,3 +1,3 @@
-COLORBLIND=1
+COLORBLIND=0
 FONT=iosevka-fixed-bold.ttf
 FULLSCREEN=0
