@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// SHELL
+// Shell
 // ----------
 // External abstraction layer for SFML programs.
 // Written by surfactants (https://github.com/surfactants).
@@ -27,8 +27,6 @@
 #include <shell.hpp>
 
 #include <fstream>
-
-#include <iostream>
 
 const std::string Config::COLORBLIND = "COLORBLIND";
 const std::string Config::FONT = "FONT";
@@ -104,9 +102,7 @@ void Shell::readConfig()
             Game::font_file = line.substr(line.find('=') + 1);
         }
         else if (key == Config::FULLSCREEN) {
-            std::cout << "found fullscreen line\n";
             if (line.find('0') != std::string::npos) {
-                std::cout << "switching to not-fullscreen\n";
                 window.create(sf::VideoMode(800, 600), window_name, sf::Style::Default, sf::ContextSettings(0, 0, 4));
             }
         }

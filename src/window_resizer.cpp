@@ -1,6 +1,29 @@
-#include "window_resizer.hpp"
+////////////////////////////////////////////////////////////
+// Window_Resizer
+// ----------
+// Resizes and repositions elements in response to Resize events.
+//
+// LICENSE: zlib (https://www.zlib.net/zlib_license.html)
+// -------
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//    claim that you wrote the original software. If you use this software
+//    in a product, an acknowledgment in the product documentation would be
+//    appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//    misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+//
+////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include "window_resizer.hpp"
 
 Window_Resizer::Window_Resizer(std::map<char, Box>& keymap,
                                std::vector<std::vector<Box>>& boxes,
@@ -26,7 +49,7 @@ void Window_Resizer::operator() (const sf::Vector2u& wsize)
     const sf::Vector2f box_padding(dimension_bpad, dimension_bpad);
     const sf::Vector2f box_offset(box_size + box_padding);
 
-    const sf::Vector2f base_guess_pos(center.x, (-box_offset.y) + box_padding.y + (box_size.y * 0.5f));
+    const sf::Vector2f base_guess_pos(center.x, (-box_size.y * 0.5f));
     sf::Vector2f guess_pos(base_guess_pos);
 
     for (unsigned int i = 0; i < guess_rows; i++) {
@@ -34,7 +57,6 @@ void Window_Resizer::operator() (const sf::Vector2u& wsize)
         guess_pos.y += box_offset.y;
         for (unsigned int j = 0; j < guess_columns; j++) {
             guess_pos.x = base_guess_pos.x + ((static_cast<int>(j) - 2) * box_offset.x);
-            std::cout << "box " << i << "-" << j << ": " << guess_pos.x << "x" << guess_pos.y << "\n";
             boxes[i][j].setSize(box_size);
             boxes[i][j].setPosition(guess_pos);
         }
@@ -71,8 +93,15 @@ void Window_Resizer::operator() (const sf::Vector2u& wsize)
 
     // TEXT_OVER
     constexpr static float font_factor { 24.f };
-    unsigned int character_size = wsize.y / font_factor;
+    unsigned int character_size;
+    if (wsize.x < wsize.y) {
+        character_size = wsize.x / font_factor;
+    }
+    else {
+        character_size = wsize.y / font_factor;
+    }
     text_over.setCharacterSize(character_size);
+    centerText(text_over);
 
     sf::Vector2f text_pos(center.x, key_pos.y);
     text_pos.y += key_padding.y * 3.f;

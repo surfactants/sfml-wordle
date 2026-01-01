@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// SHELL
+// Shell
 // ----------
 // External abstraction layer for SFML programs.
 // Written by surfactants (https://github.com/surfactants).

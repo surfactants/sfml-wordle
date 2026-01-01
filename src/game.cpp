@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// GAME
+// Game
 // ----------
 // Encapsulates and handles game logic and rendering.
 // Written by surfactants (https://github.com/surfactants).

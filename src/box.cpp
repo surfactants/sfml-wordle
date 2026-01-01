@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// BOX
+// Box
 // ----------
 // Displays a single letter in a frame.
 // Written by surfactants (https://github.com/surfactants).
