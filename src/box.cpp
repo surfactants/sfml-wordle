@@ -36,10 +36,10 @@ const sf::Color Box::color_text = sf::Color(244, 244, 244);
 const sf::Color Box::color_outline = Box::color_text;
 const sf::Color Box::color_empty = sf::Color(11, 11, 11);
 
-sf::Color Box::color_wrong = sf::Color(244, 55, 55);
+sf::Color Box::color_wrong = sf::Color(255, 150, 150);
 sf::Color Box::color_invalid = Box::color_wrong;
-sf::Color Box::color_maybe = sf::Color(233, 233, 55);
-sf::Color Box::color_right = sf::Color(77, 202, 77);
+sf::Color Box::color_maybe = sf::Color(255, 255, 180);
+sf::Color Box::color_right = sf::Color(150, 255, 150);
 
 
 const float Box::outline_thickness { 2.f };
